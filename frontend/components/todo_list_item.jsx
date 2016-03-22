@@ -1,18 +1,37 @@
 var React = require('react');
+var DoneButton = require('./done_button');
+var TodoDetailView = require('./todo_detail_view');
 
 var TodoListItem = React.createClass({
+	getInitialState: function () {
+		return { isVisible: false };
+	},
 
-	handleDestroy: function (e) {
-		this.props.onDestroy(this.props.todo.id);
+	handleClick: function () {
+		this.setState({ isVisible: !this.state.isVisible });
 	},
 
 	render: function () {
+		var detailView = "";
+		if (this.state.isVisible) {
+			detailView = (<TodoDetailView
+				todo={this.props.todo}
+				onDestroy={this.props.onDestroy}
+				/>);
+		}
+
 		return (
 			<div>
-				<div><h2>{this.props.todo.title}</h2></div>
-				<div><p>{this.props.todo.body}</p></div>
+				<div onClick={this.handleClick}>
+					<h2>{this.props.todo.title}</h2>
+				</div>
+				{detailView}
+				<DoneButton
+					buttonId={this.props.todo.id}
+					done={this.props.todo.done}
+					doneClick={this.props.doneClick}
+					/>
 				<div>
-					<button onClick={this.handleDestroy}>Delete this Todo</button>
 				</div>
 			</div>
 		);

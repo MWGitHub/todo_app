@@ -2,6 +2,7 @@ var React = require('react');
 var TodoStore = require('../stores/todo_store');
 var TodoListItem = require('./todo_list_item');
 var TodoForm = require('./todo_form');
+var DoneButton = require('./done_button');
 
 
 var TodoList = React.createClass({
@@ -22,6 +23,10 @@ var TodoList = React.createClass({
 		TodoStore.destroy(id);
 	},
 
+	toggleTodo: function (id) {
+		TodoStore.toggleDone(id);
+	},
+
 	componentDidMount: function () {
 		TodoStore.addChangedHandler(this.todosChanged);
 		TodoStore.fetch();
@@ -35,8 +40,11 @@ var TodoList = React.createClass({
 		var self = this;
 		var todos = this.state.todos.map(function (todo) {
 			return (
-				<TodoListItem key={"todo-" + todo.id}
-					todo={todo} onDestroy={self.deleteTodo} />
+				<TodoListItem
+					key={"todo-" + todo.id}
+					todo={todo} onDestroy={self.deleteTodo}
+					doneClick={self.toggleTodo}
+					/>
 			);
 		});
 
