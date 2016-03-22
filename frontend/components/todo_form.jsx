@@ -30,22 +30,22 @@ var TodoForm = React.createClass({
 	render: function () {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<h2>Make a New ToDo</h2>
-				<p>
-					<label>Title
-						<input type="text" value={this.state.title}
-							onChange={this.updateTitle} />
-					</label>
-				</p>
-				<p>
+				<div class="form-group">
+					<h2>Make a New ToDo</h2>
+				</div>
+				<div class="form-group">
+						<label>Title
+							<input type="text" value={this.state.title}
+								onChange={this.updateTitle} />
+						</label>
+				</div>
+				<div class="form-group">
 					<label>Body
 						<textarea value={this.state.body}
 							onChange={this.updateBody}></textarea>
 					</label>
-				</p>
-				<p>
-					<input type="submit" value="Create ToDoList Item"/>
-				</p>
+				</div>
+				<input class="btn btn-default"  type="submit" value="Create ToDoList Item"/>
 			</form>
 		);
 	}
