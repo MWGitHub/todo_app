@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+FactoryGirl.define do
+  factory :todo do
+    title { Faker::Hipster.word }
+    body { Faker::Hipster.sentence }
+    done { Faker::Boolean.boolean }
+  end
+end
+
+10.times do |i|
+	FactoryGirl.create(:todo)
+end
