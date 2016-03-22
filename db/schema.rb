@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322161237) do
+ActiveRecord::Schema.define(version: 20160322202809) do
+
+  create_table "steps", force: :cascade do |t|
+    t.text     "step",                       null: false
+    t.integer  "todo_id",                    null: false
+    t.boolean  "done",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "steps", ["todo_id"], name: "index_steps_on_todo_id"
 
   create_table "todos", force: :cascade do |t|
     t.string   "title",                      null: false
